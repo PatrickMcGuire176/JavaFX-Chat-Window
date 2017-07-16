@@ -23,28 +23,29 @@ import javax.swing.*;
 public class Main extends Application {
 
     Stage window;
-
     TableView<Product> table;
-
     ListView<String> listView;
+    String username = "Test User";
 
     public static void main(String[] args) {
         launch();
         //launch(args);
+
     }
 
     @Override
     public void start(Stage window) throws Exception {
         this.window = window;
 
-
         //Text Area of GridPane Center
         TextArea textArea = new TextArea();
         textArea.setPrefWidth(800);
         textArea.setPrefHeight(400);
         textArea.setText("Test");
-        textArea.setDisable(true);
+        textArea.setEditable(false);
+        textArea.setStyle("-fx-background-color: #ffffff;-fx-text-fill: black; -fx-opacity: 1;");
 
+        //Text field for User Chatting
         TextField textInput = new TextField();
         textInput.setPrefWidth(1000);
         textInput.setPrefHeight(100);
@@ -56,13 +57,20 @@ public class Main extends Application {
             }
         });
 
+        //Label for UserList
+        Label label1 = new Label();
+        label1.setText(username + "\n");
+
+
         //choiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> System.out.println("newValue"));
 
         VBox vBox = new VBox();
-        vBox.setSpacing(10);
+        vBox.setSpacing(100);
+        vBox.setPadding(new Insets(5,10,10,5));
         vBox.setBorder(new Border(new BorderStroke(Color.RED,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         vBox.setPrefWidth(200);
+        vBox.getChildren().addAll(label1);
 
         //Bottom HBox Row
         HBox hBox = new HBox();
@@ -70,6 +78,7 @@ public class Main extends Application {
         hBox.setBorder(new Border(new BorderStroke(Color.GOLD,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         hBox.setPrefWidth(200);
+
 
         //Window GridPane - More Flexible than HBox and VBox
         GridPane gridPane = new GridPane();
@@ -88,6 +97,10 @@ public class Main extends Application {
         window.setTitle("Title of Window");
         window.setScene(scene);
         window.show();
+
+        LoginScreen loginScreen = new LoginScreen();
+        username += loginScreen.display();
+
 
     }
 
